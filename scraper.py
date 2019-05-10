@@ -11,6 +11,9 @@ def basicSoup(url):
 
 
 data = {}
+
+data_to_file = open("dataset/onlineKhabar.csv", 'w')
+csv_writer = csv.writer(data_to_file)
 '''
 This code only scrapes the technology news. Change myUrl to scrape other news as well.
 '''
@@ -38,11 +41,11 @@ for i in range(1, 207):
 
         data[heading] = paragraph
 
+        for row1,row2 in data.items():
+            csv_writer.writerow([row1,row2])
+
     
 
-data_to_file = open("onlineKhabar.csv", 'w')
-csv_writer = csv.writer(data_to_file)
 
 
-for row1,row2 in data.items():
-        csv_writer.writerow([row1,row2])
+
