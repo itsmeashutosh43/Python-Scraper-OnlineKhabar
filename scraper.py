@@ -11,6 +11,9 @@ def basicSoup(url):
 
 
 data = {}
+'''
+This code only scrapes the technology news. Change myUrl to scrape other news as well.
+'''
 myUrl = "https://www.onlinekhabar.com/content/business/technology"
 
 for i in range(1, 207):
