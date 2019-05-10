@@ -1,7 +1,7 @@
 import requests
 import bs4
 import pandas as pd
-import json
+import json,csv
 
 
 def basicSoup(url):
@@ -25,6 +25,7 @@ for i in range(1, 207):
     for url in urls:
         soup = basicSoup(url)
         heading = soup.find(name='h2', attrs={'class': 'mb-0'})
+        heading=heading.get_text()
 
         paragraphs = soup.find(name='div', attrs={
             'class': 'col colspan3 main__read--content ok18-single-post-content-wrap'})
@@ -32,6 +33,13 @@ for i in range(1, 207):
         paragraph = [paragraph.get_text(strip=True)
                      for paragraph in paragraphs.findAll('p')]
 
-        data[heading] = paragraphs
+        data[heading] = paragraph
 
-json.dumps(data)
+    
+
+data_to_file = open("onlineKhabar.csv", 'w')
+csv_writer = csv.writer(data_to_file)
+
+
+for row1,row2 in data.items():
+        csv_writer.writerow([row1,row2])
