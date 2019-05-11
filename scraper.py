@@ -1,7 +1,8 @@
 import requests
 import bs4
 import pandas as pd
-import json,csv
+import json
+import csv
 
 
 def basicSoup(url):
@@ -11,7 +12,8 @@ def basicSoup(url):
 
 
 data = {}
-
+session = requests.Session()
+session.max_redirects = 60
 data_to_file = open("dataset/onlineKhabar.csv", 'w')
 csv_writer = csv.writer(data_to_file)
 '''
@@ -19,7 +21,7 @@ This code only scrapes the technology news. Change myUrl to scrape other news as
 '''
 myUrl = "https://www.onlinekhabar.com/content/business/technology"
 
-for i in range(1, 207):
+for i in range(1, 113):
     print("Doing page ", i)
     url = myUrl+'/page'+str(i)
     soup = basicSoup(url)
@@ -31,7 +33,7 @@ for i in range(1, 207):
     for url in urls:
         soup = basicSoup(url)
         heading = soup.find(name='h2', attrs={'class': 'mb-0'})
-        heading=heading.get_text()
+        heading = heading.get_text()
 
         paragraphs = soup.find(name='div', attrs={
             'class': 'col colspan3 main__read--content ok18-single-post-content-wrap'})
@@ -41,11 +43,5 @@ for i in range(1, 207):
 
         data[heading] = paragraph
 
-        for row1,row2 in data.items():
-            csv_writer.writerow([row1,row2])
-
-    
-
-
-
-
+        for row1, row2 in data.items():
+            csv_writer.writerow([row1, row2])
