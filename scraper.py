@@ -21,7 +21,7 @@ This code only scrapes the technology news. Change myUrl to scrape other news as
 '''
 myUrl = "https://www.onlinekhabar.com/content/business/technology"
 
-for i in range(1, 113):
+for i in range(80, 113):
     print("Doing page ", i)
     url = myUrl+'/page'+str(i)
     soup = basicSoup(url)
