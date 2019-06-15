@@ -21,7 +21,7 @@ This code only scrapes the technology news. Change myUrl to scrape other news as
 '''
 myUrl = "https://www.onlinekhabar.com/content/business/technology"
 
-for i in range(80, 113):
+for i in range(1, 34):
     print("Doing page ", i)
     url = myUrl+'/page'+str(i)
     soup = basicSoup(url)
@@ -44,4 +44,6 @@ for i in range(80, 113):
         data[heading] = paragraph
 
         for row1, row2 in data.items():
+            print(row1,row2)
             csv_writer.writerow([row1, row2])
+        data={}
